@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_catalogue/ui/movie/movie_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -39,10 +40,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 24);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Movies',
-      style: optionStyle,
-    ),
+    MoviePage(),
     Text(
       'TV Shows',
       style: optionStyle,
@@ -65,9 +63,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: AppBar(
         title: const Text('BottomNavigationBar Sample'),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
