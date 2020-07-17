@@ -1,8 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
 class ItemMovie extends StatefulWidget {
+  final int id;
+  final String posterUrl;
+  final String movieTitle;
+  final String rating;
+  final ItemMovieCallback onTap;
+
   ItemMovie({
     Key key,
     this.id,
@@ -11,12 +18,6 @@ class ItemMovie extends StatefulWidget {
     this.rating,
     this.onTap,
   }) : super(key: key);
-
-  final int id;
-  final String posterUrl;
-  final String movieTitle;
-  final String rating;
-  final ItemMovieCallback onTap;
 
   @override
   State<StatefulWidget> createState() => _ItemMovieState(
@@ -29,6 +30,12 @@ class ItemMovie extends StatefulWidget {
 }
 
 class _ItemMovieState extends State<ItemMovie> {
+  final int id;
+  final String posterUrl;
+  final String movieTitle;
+  final String rating;
+  final ItemMovieCallback onTap;
+
   _ItemMovieState({
     this.id,
     this.posterUrl = '',
@@ -37,26 +44,22 @@ class _ItemMovieState extends State<ItemMovie> {
     this.onTap,
   });
 
-  final int id;
-  final String posterUrl;
-  final String movieTitle;
-  final String rating;
-  final ItemMovieCallback onTap;
-
   final BorderRadius _borderRadius = BorderRadius.circular(8);
   final Radius _radius = Radius.circular(8);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(16),
+      margin: EdgeInsets.all(8),
       shadowColor: Colors.black38,
       shape: RoundedRectangleBorder(
         borderRadius: _borderRadius,
       ),
       child: InkWell(
         onTap: () {
-          onTap(id);
+          if (onTap != null) {
+            onTap(id);
+          }
         },
         borderRadius: _borderRadius,
         child: Column(
@@ -67,13 +70,15 @@ class _ItemMovieState extends State<ItemMovie> {
                 topLeft: _radius,
                 topRight: _radius,
               ),
-              child: Image(
-                image: NetworkImage(posterUrl),
+              child: CachedNetworkImage(
+                imageUrl: posterUrl,
               ),
             ),
             ListTile(
               title: Text(
                 movieTitle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
