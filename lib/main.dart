@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_catalogue/ui/movie/movie_page.dart';
+import 'package:movie_catalogue/ui/tv_show/tv_show_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -41,10 +42,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle = TextStyle(fontSize: 24);
   static const List<Widget> _widgetOptions = <Widget>[
     MoviePage(),
-    Text(
-      'TV Shows',
-      style: optionStyle,
-    ),
+    TvShowPage(),
     Text(
       'Favorites',
       style: optionStyle,
