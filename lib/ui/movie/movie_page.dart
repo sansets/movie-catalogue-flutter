@@ -196,7 +196,7 @@ class _MoviePageState extends State<MoviePage> {
       itemBuilder: (context, index) => ItemMovie(
         id: movies[index].id,
         posterUrl: movies[index].posterUrl,
-        movieTitle: movies[index].title,
+        title: movies[index].title,
         rating: movies[index].voteAverage.toString(),
       ),
       staggeredTileBuilder: (index) => StaggeredTile.fit(2),
