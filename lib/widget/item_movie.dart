@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
-class ItemMovie extends StatefulWidget {
+class ItemMovie extends StatelessWidget {
   final int id;
   final String posterUrl;
-  final String movieTitle;
+  final String title;
   final String rating;
   final ItemMovieCallback onTap;
 
@@ -14,35 +14,10 @@ class ItemMovie extends StatefulWidget {
     Key key,
     this.id,
     this.posterUrl,
-    this.movieTitle,
+    this.title,
     this.rating,
     this.onTap,
   }) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _ItemMovieState(
-        id: id,
-        posterUrl: posterUrl,
-        movieTitle: movieTitle,
-        rating: rating,
-        onTap: onTap,
-      );
-}
-
-class _ItemMovieState extends State<ItemMovie> {
-  final int id;
-  final String posterUrl;
-  final String movieTitle;
-  final String rating;
-  final ItemMovieCallback onTap;
-
-  _ItemMovieState({
-    this.id,
-    this.posterUrl = '',
-    this.movieTitle = '',
-    this.rating = '',
-    this.onTap,
-  });
 
   final BorderRadius _borderRadius = BorderRadius.circular(8);
   final Radius _radius = Radius.circular(8);
@@ -70,13 +45,16 @@ class _ItemMovieState extends State<ItemMovie> {
                 topLeft: _radius,
                 topRight: _radius,
               ),
-              child: CachedNetworkImage(
-                imageUrl: posterUrl,
+              child: AspectRatio(
+                aspectRatio: 2 / 3,
+                child: CachedNetworkImage(
+                  imageUrl: posterUrl,
+                ),
               ),
             ),
             ListTile(
               title: Text(
-                movieTitle,
+                title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

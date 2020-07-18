@@ -192,7 +192,7 @@ class _TvShowPageState extends State<TvShowPage> {
       itemBuilder: (context, index) => ItemMovie(
         id: movies[index].id,
         posterUrl: movies[index].posterUrl,
-        movieTitle: movies[index].name,
+        title: movies[index].name,
         rating: movies[index].voteAverage.toString(),
       ),
       staggeredTileBuilder: (index) => StaggeredTile.fit(2),
