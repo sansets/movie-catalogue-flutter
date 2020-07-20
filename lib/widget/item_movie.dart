@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:movie_catalogue/widget/poster.dart';
 
 class ItemMovie extends StatelessWidget {
   final int id;
@@ -12,69 +12,67 @@ class ItemMovie extends StatelessWidget {
 
   ItemMovie({
     Key key,
-    this.id,
-    this.posterUrl,
-    this.title,
-    this.rating,
+    @required this.id,
+    @required this.posterUrl,
+    @required this.title,
+    @required this.rating,
     this.onTap,
   }) : super(key: key);
 
-  final BorderRadius _borderRadius = BorderRadius.circular(8);
-  final Radius _radius = Radius.circular(8);
+  final BorderRadius _borderRadius = BorderRadius.circular(16);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       margin: EdgeInsets.all(8),
-      shadowColor: Colors.black38,
-      shape: RoundedRectangleBorder(
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: _borderRadius,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8.0,
+            offset: new Offset(0.0, 4.0),
+          ),
+        ],
       ),
-      child: InkWell(
-        onTap: () {
-          if (onTap != null) {
-            onTap(id);
-          }
-        },
+      child: Material(
         borderRadius: _borderRadius,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: _radius,
-                topRight: _radius,
-              ),
-              child: AspectRatio(
-                aspectRatio: 2 / 3,
-                child: CachedNetworkImage(
-                  imageUrl: posterUrl,
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              subtitle: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                spacing: 8,
-                children: [
-                  Icon(
-                    Icons.star,
-                    color: Colors.blue,
-                    size: 16,
+        child: InkWell(
+          onTap: () {
+            if (onTap != null) {
+              onTap(id);
+            }
+          },
+          borderRadius: _borderRadius,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Poster(posterUrl: posterUrl),
+              ListTile(
+                title: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
                   ),
-                  Text(rating),
-                ],
+                ),
+                subtitle: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 8,
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: Colors.blue,
+                      size: 16,
+                    ),
+                    Text(rating),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
