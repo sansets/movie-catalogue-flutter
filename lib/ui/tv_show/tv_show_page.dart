@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:movie_catalogue/ui/detail/detail_page.dart';
 import 'package:movie_catalogue/ui/tv_show/tv_show_model.dart';
 import 'package:movie_catalogue/widget/item_movie.dart';
 
@@ -13,7 +14,40 @@ class TvShowPage extends StatefulWidget {
 }
 
 class _TvShowPageState extends State<TvShowPage> {
-  final List<TvShowModel> movies = List.from([
+  @override
+  Widget build(BuildContext context) {
+    return StaggeredGridView.countBuilder(
+      crossAxisCount: 4,
+      itemCount: tvShows.length,
+      padding: EdgeInsets.all(8),
+      itemBuilder: (context, index) {
+        final tvShow = tvShows[index];
+
+        return ItemMovie(
+          id: tvShow.id,
+          posterUrl: tvShow.posterUrl,
+          title: tvShow.name,
+          rating: tvShow.voteAverage.toString(),
+          onTap: (id) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return DetailPage(
+                id: tvShow.id,
+                title: tvShow.name,
+                voteAverage: tvShow.voteAverage,
+                releaseDate: tvShow.firstAirDate,
+                posterUrl: tvShow.posterUrl,
+                backdropUrl: tvShow.backdropUrl,
+                overview: tvShow.overview,
+              );
+            }));
+          },
+        );
+      },
+      staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+    );
+  }
+
+  final List<TvShowModel> tvShows = List.from([
     TvShowModel(
       id: 2734,
       name: 'Law & Order: Special Victims Unit',
@@ -182,20 +216,4 @@ class _TvShowPageState extends State<TvShowPage> {
       ]),
     ),
   ]);
-
-  @override
-  Widget build(BuildContext context) {
-    return StaggeredGridView.countBuilder(
-      crossAxisCount: 4,
-      itemCount: movies.length,
-      padding: EdgeInsets.all(8),
-      itemBuilder: (context, index) => ItemMovie(
-        id: movies[index].id,
-        posterUrl: movies[index].posterUrl,
-        title: movies[index].name,
-        rating: movies[index].voteAverage.toString(),
-      ),
-      staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-    );
-  }
 }
