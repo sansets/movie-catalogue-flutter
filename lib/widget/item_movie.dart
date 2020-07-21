@@ -56,6 +56,7 @@ class ItemMovie extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
+                    fontFamily: 'Montserrat'
                   ),
                 ),
                 subtitle: Wrap(
