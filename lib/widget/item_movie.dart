@@ -31,8 +31,8 @@ class ItemMovie extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 8.0,
-            offset: new Offset(0.0, 4.0),
+            blurRadius: 4.0,
+            offset: new Offset(0.0, 2.0),
           ),
         ],
       ),
