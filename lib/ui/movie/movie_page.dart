@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:movie_catalogue/ui/detail/detail_page.dart';
 import 'package:movie_catalogue/ui/movie/movie_model.dart';
+import 'package:movie_catalogue/widget/app_bar_default.dart';
 import 'package:movie_catalogue/widget/item_movie.dart';
 
 class MoviePage extends StatefulWidget {
@@ -16,34 +17,38 @@ class MoviePage extends StatefulWidget {
 class _MoviePageState extends State<MoviePage> {
   @override
   Widget build(BuildContext context) {
-    return StaggeredGridView.countBuilder(
-      padding: EdgeInsets.all(8),
-      crossAxisCount: 4,
-      itemCount: movies.length,
-      itemBuilder: (context, index) {
-        final movie = movies[index];
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBarDefault(title: "Movies"),
+      body: StaggeredGridView.countBuilder(
+        padding: EdgeInsets.all(8),
+        crossAxisCount: 4,
+        itemCount: movies.length,
+        itemBuilder: (context, index) {
+          final movie = movies[index];
 
-        return ItemMovie(
-          id: movie.id,
-          posterUrl: movie.posterUrl,
-          title: movie.title,
-          rating: movie.voteAverage.toString(),
-          onTap: (id) {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return DetailPage(
-                id: movie.id,
-                title: movie.title,
-                voteAverage: movie.voteAverage,
-                releaseDate: movie.releaseDate,
-                posterUrl: movie.posterUrl,
-                backdropUrl: movie.backdropUrl,
-                overview: movie.overview,
-              );
-            }));
-          },
-        );
-      },
-      staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+          return ItemMovie(
+            id: movie.id,
+            posterUrl: movie.posterUrl,
+            title: movie.title,
+            rating: movie.voteAverage.toString(),
+            onTap: (id) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return DetailPage(
+                  id: movie.id,
+                  title: movie.title,
+                  voteAverage: movie.voteAverage,
+                  releaseDate: movie.releaseDate,
+                  posterUrl: movie.posterUrl,
+                  backdropUrl: movie.backdropUrl,
+                  overview: movie.overview,
+                );
+              }));
+            },
+          );
+        },
+        staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+      ),
     );
   }
 
