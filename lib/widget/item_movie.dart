@@ -26,17 +26,17 @@ class ItemMovie extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: _borderRadius,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 4.0,
+            blurRadius: 2.0,
             offset: new Offset(0.0, 2.0),
           ),
         ],
       ),
       child: Material(
+        color: Colors.white,
         borderRadius: _borderRadius,
         child: InkWell(
           onTap: () {
