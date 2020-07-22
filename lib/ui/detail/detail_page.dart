@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movie_catalogue/ui/detail/detail_model.dart';
+import 'package:movie_catalogue/widget/poster.dart';
 
 class DetailPage extends StatefulWidget {
   final int id;
@@ -52,82 +53,114 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CachedNetworkImage(
-              imageUrl: detailModel.backdropUrl,
+    return Material(
+      child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 256,
+            backgroundColor: Colors.white,
+            flexibleSpace: FlexibleSpaceBar(
+              background: CachedNetworkImage(
+                imageUrl: detailModel.backdropUrl,
+                fit: BoxFit.cover,
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Row(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.favorite_border),
+                onPressed: () {
+                  
+                },
+              ),
+            ],
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: CachedNetworkImage(
-                      imageUrl: detailModel.posterUrl,
-                      width: 128,
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ListTile(
-                          title: Text(
-                            detailModel.title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          subtitle: Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: 8,
+                        Poster(
+                          posterUrl: detailModel.posterUrl,
+                          width: 128,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.blue,
-                                size: 16,
+                              ListTile(
+                                title: Text(
+                                  detailModel.title,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20,
+                                      fontFamily: "Montserrat"),
+                                ),
+                                subtitle: Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  spacing: 8,
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.blue,
+                                      size: 16,
+                                    ),
+                                    Text(detailModel.voteAverage.toString()),
+                                  ],
+                                ),
                               ),
-                              Text(detailModel.voteAverage.toString()),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
+                                ),
+                                child: Text(
+                                    _getYearString(detailModel.releaseDate)),
+                              ),
                             ],
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(_getYearString(detailModel.releaseDate)),
-                        ),
+                        )
                       ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+                    child: Text(
+                      "Overview",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+                    child: Text(
+                      detailModel.overview,
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 15,
+                      ),
                     ),
                   )
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                right: 24,
-                top: 24,
-                bottom: 16,
-              ),
-              child: Text("Overview"),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-              child: Text(detailModel.overview),
-            )
-          ],
-        ),
+            ]),
+          ),
+        ],
       ),
     );
   }
