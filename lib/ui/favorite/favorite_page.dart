@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:movie_catalogue/ui/detail/detail_page.dart';
 import 'package:movie_catalogue/ui/movie/movie_model.dart';
 import 'package:movie_catalogue/ui/tv_show/tv_show_model.dart';
+import 'package:movie_catalogue/widget/app_bar_default.dart';
 import 'package:movie_catalogue/widget/item_movie.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -20,21 +21,15 @@ class _FavoritePageState extends State<FavoritePage> {
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            'Favorites',
-            style: TextStyle(
-                fontFamily: "Montserrat",
-                color: Colors.black,
-                fontWeight: FontWeight.w600),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
+        appBar: AppBarDefault(
+          title: 'Favorites',
           bottom: TabBar(
             labelColor: Theme.of(context).primaryColor,
             unselectedLabelColor: Colors.black45,
             labelStyle: TextStyle(
-                fontFamily: "Montserrat", fontWeight: FontWeight.w600),
+              fontFamily: "Montserrat",
+              fontWeight: FontWeight.w600,
+            ),
             tabs: [
               Tab(text: 'Movies'),
               Tab(text: 'TV Shows'),
