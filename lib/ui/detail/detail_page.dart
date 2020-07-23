@@ -24,7 +24,7 @@ class DetailPage extends StatefulWidget {
     @required this.posterUrl,
     @required this.backdropUrl,
     @required this.overview,
-    this.isFavorite,
+    this.isFavorite = false,
     this.genreIds,
   }) : super(key: key);
 
@@ -73,9 +73,16 @@ class _DetailPageState extends State<DetailPage> {
             ),
             actions: [
               IconButton(
-                icon: Icon(Icons.favorite_border),
+                icon: Icon(
+                  detailModel.isFavorite
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  color: detailModel.isFavorite ? Colors.red : Colors.white,
+                ),
                 onPressed: () {
-                  
+                  setState(() {
+                    detailModel.isFavorite = !detailModel.isFavorite;
+                  });
                 },
               ),
             ],
