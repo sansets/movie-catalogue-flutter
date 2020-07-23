@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_catalogue/ui/favorite/favorite_page.dart';
 import 'package:movie_catalogue/ui/movie/movie_page.dart';
 import 'package:movie_catalogue/ui/tv_show/tv_show_page.dart';
 
@@ -58,7 +59,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const List<Widget> _widgetOptions = <Widget>[
     MoviePage(),
     TvShowPage(),
-    Text('Favorites'),
+    FavoritePage(),
   ];
 
   void _onItemTapped(int index) {
