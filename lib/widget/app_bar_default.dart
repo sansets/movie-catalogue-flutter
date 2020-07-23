@@ -21,9 +21,8 @@ class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
         title: Text(
           title,
           style: TextStyle(
-              fontFamily: "Montserrat",
-              color: Colors.black,
-              fontWeight: FontWeight.w600),
+            color: Colors.black,
+          ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
