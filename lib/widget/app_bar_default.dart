@@ -3,8 +3,9 @@ import 'package:flutter/widgets.dart';
 
 class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final PreferredSizeWidget bottom;
 
-  AppBarDefault({this.title});
+  AppBarDefault({this.title, this.bottom});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
+        bottom: bottom,
       ),
     );
   }
