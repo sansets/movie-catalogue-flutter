@@ -10,23 +10,20 @@ class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 3.0,
-            offset: new Offset(0.0, 3.0),
-          ),
-        ]
-      ),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.06),
+          blurRadius: 3.0,
+          offset: new Offset(0.0, 3.0),
+        ),
+      ]),
       child: AppBar(
         title: Text(
           title,
           style: TextStyle(
-            fontFamily: "Montserrat",
-            color: Colors.black,
-            fontWeight: FontWeight.w600
-          ),
+              fontFamily: "Montserrat",
+              color: Colors.black,
+              fontWeight: FontWeight.w600),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -36,5 +33,6 @@ class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight + (bottom?.preferredSize?.height ?? 0.0));
 }
