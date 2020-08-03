@@ -17,6 +17,7 @@ class AppDatabase {
         return db.execute(
           "CREATE TABLE favorites("
           "id INTEGER PRIMARY KEY, "
+          "category INTEGER, "
           "data TEXT"
           ")",
         );
