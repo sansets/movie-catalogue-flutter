@@ -1,23 +1,11 @@
-class DetailModel {
-  int id;
-  String title;
-  double voteAverage;
-  String releaseDate;
-  String posterUrl;
-  String backdropUrl;
-  String overview;
+class DetailModel<T> {
+  int category;
   bool isFavorite;
-  Set<int> genreIds;
+  T data;
 
   DetailModel({
-    this.id,
-    this.title,
-    this.voteAverage,
-    this.releaseDate,
-    this.posterUrl,
-    this.backdropUrl,
-    this.overview,
+    this.category,
     this.isFavorite,
-    this.genreIds,
+    this.data
   }) : super();
 }

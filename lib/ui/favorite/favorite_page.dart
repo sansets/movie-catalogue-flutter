@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:movie_catalogue/ui/detail/detail_page.dart';
 import 'package:movie_catalogue/ui/movie/movie_model.dart';
 import 'package:movie_catalogue/ui/tv_show/tv_show_model.dart';
+import 'package:movie_catalogue/util/app_environment.dart';
 import 'package:movie_catalogue/widget/app_bar_default.dart';
 import 'package:movie_catalogue/widget/item_movie.dart';
 
@@ -64,15 +65,16 @@ class _MovieTab extends StatelessWidget {
           rating: movie.voteAverage.toString(),
           onTap: (id) {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return DetailPage(
-                id: movie.id,
+              return DetailPage<MovieModel>(
                 title: movie.title,
                 voteAverage: movie.voteAverage,
                 releaseDate: movie.releaseDate,
                 posterUrl: movie.posterUrl,
                 backdropUrl: movie.backdropUrl,
                 overview: movie.overview,
+                category: AppEnvironment.CATEGORY_MOVIE,
                 isFavorite: true,
+                data: movie,
               );
             }));
           },
@@ -175,15 +177,16 @@ class _TvShowTab extends StatelessWidget {
           rating: tvShow.voteAverage.toString(),
           onTap: (id) {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return DetailPage(
-                id: tvShow.id,
+              return DetailPage<TvShowModel>(
                 title: tvShow.name,
                 voteAverage: tvShow.voteAverage,
                 releaseDate: tvShow.firstAirDate,
                 posterUrl: tvShow.posterUrl,
                 backdropUrl: tvShow.backdropUrl,
                 overview: tvShow.overview,
+                category: AppEnvironment.CATEGORY_TV_SHOW,
                 isFavorite: true,
+                data: tvShow,
               );
             }));
           },
